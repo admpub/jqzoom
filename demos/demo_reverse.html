@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <title>JQzoom 2 Demo</title>
-<script src="../js/jquery-1.5.js" type="text/javascript"></script>
+<script src="../js/jquery-1.6.js" type="text/javascript"></script>
 <script src="../js/jquery.jqzoom-core.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../css/jquery.jqzoom.css" type="text/css">
@@ -45,6 +45,7 @@ ul#thumblist li a.zoomThumbActive{
 
 $(document).ready(function() {
 	$('.jqzoom').jqzoom({
+			largeImageAttrName:'href',
             zoomType: 'reverse',
             lens:true,
             preloadImages: false,
@@ -79,6 +80,6 @@ $(document).ready(function() {
      <a href='mailto:renzi.mrc@gmail.com' style="display:inline-block">
      <img src='../images/advertise.jpg'>
      </a>
-      &nbsp;   
+      &nbsp;
 </div>
 </body></html>
