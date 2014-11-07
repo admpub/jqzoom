@@ -20,7 +20,7 @@
  */
 (function ($) {
 	//GLOBAL VARIABLES
-	var isIE6 = ($.browser.msie && $.browser.version < 7);
+	var isIE6 = ($.browser !== undefined && $.browser.msie && $.browser.version < 7);
 	var body = $(document.body);
 	var window = $(window);
 	var jqzoompluging_disabled = false; //disabilita globalmente il plugin
@@ -33,11 +33,12 @@
 		});
 	};
 	jqzoom = function (el, options) {
-		var api = null;
-		api = $(el).data("jqzoom");
-		if (api) return api;
-		var obj = this;
 		var settings = $.extend({}, $.jqzoom.defaults, options || {});
+		if(!settings.reinit){
+			var api = $(el).data("jqzoom");
+			if (api) return api;
+		}
+		var obj = this;
 		obj.el = el;
 		el.rel = $(el).attr('rel');
 		el.gallery = '';
@@ -705,6 +706,7 @@
 	$.jqzoom = {
 		defaults: {
 			largeImageAttrName: 'data-large-image',
+			reinit: false,
 			zoomType: 'standard',
 			//innerzoom/standard/reverse/drag
 			zoomWidth: 300,
