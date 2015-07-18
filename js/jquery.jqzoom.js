@@ -187,7 +187,8 @@
 				thumblist.each(function () {
 					//preloading thumbs
 					if (settings.preloadImages) {
-						var thumb_options = $.extend({}, eval("(" + $.trim($(this).attr('rel')) + ")"));
+						var json_str=FormatJSON($.trim($(this).attr('rel')));
+						var thumb_options = $.extend({}, JSON.parse(json_str));
 						thumb_preload[i] = new Image();
 						thumb_preload[i].src = thumb_options.largeimage;
 						i++;
@@ -240,7 +241,8 @@
 				el.largeimageloading = false;
 				el.largeimageloaded = false;
 				var options = new Object();
-				options = $.extend({}, eval("(" + $.trim($(link).attr('rel')) + ")"));
+				var json_str=FormatJSON($.trim($(link).attr('rel')));
+				options = $.extend({}, JSON.parse(json_str));
 				if (options.smallimage && options.largeimage) {
 					var smallimage = options.smallimage;
 					var largeimage = options.largeimage;
@@ -271,6 +273,12 @@
 			//fetching data from sallimage if was previously loaded
 			smallimage.fetchdata();
 			if ($(".zoomPad", el).length == 0) obj.create();
+		}
+
+		function FormatJSON(json_str){
+			json_str = json_str.replace(/(\{|,)\s*([\w]+)\s*:/g,'$1"$2":');
+			json_str = json_str.replace(/'/g,'"');
+			return json_str;
 		}
 /*========================================================,
 |   Smallimage
